@@ -1,15 +1,15 @@
 # netbox-python
 
-[![Release](https://img.shields.io/github/v/release/arthanson/netbox-python)](https://img.shields.io/github/v/release/arthanson/netbox-python)
-[![Build status](https://img.shields.io/github/actions/workflow/status/arthanson/netbox-python/main.yml?branch=main)](https://github.com/arthanson/netbox-python/actions/workflows/main.yml?query=branch%3Amain)
-[![codecov](https://codecov.io/gh/arthanson/netbox-python/branch/main/graph/badge.svg)](https://codecov.io/gh/arthanson/netbox-python)
-[![Commit activity](https://img.shields.io/github/commit-activity/m/arthanson/netbox-python)](https://img.shields.io/github/commit-activity/m/arthanson/netbox-python)
-[![License](https://img.shields.io/github/license/arthanson/netbox-python)](https://img.shields.io/github/license/arthanson/netbox-python)
+[![Release](https://img.shields.io/github/v/release/netbox-community/netbox-python)](https://img.shields.io/github/v/release/netbox-community/netbox-python)
+[![Build status](https://img.shields.io/github/actions/workflow/status/netbox-community/netbox-python/main.yml?branch=main)](https://github.com/netbox-community/netbox-python/actions/workflows/main.yml?query=branch%3Amain)
+[![codecov](https://codecov.io/gh/netbox-community/netbox-python/branch/main/graph/badge.svg)](https://codecov.io/gh/netbox-community/netbox-python)
+[![Commit activity](https://img.shields.io/github/commit-activity/m/netbox-community/netbox-python)](https://img.shields.io/github/commit-activity/m/netbox-community/netbox-python)
+[![License](https://img.shields.io/github/license/netbox-community/netbox-python)](https://img.shields.io/github/license/netbox-community/netbox-python)
 
 Python NetBox API Client
 
-- **Github repository**: <https://github.com/arthanson/netbox-python/>
-- **Documentation** <https://arthanson.github.io/netbox-python/>
+- **Github repository**: <https://github.com/netbox-community/netbox-python/>
+- **Documentation** <https://netbox-community.github.io/netbox-python/>
 
 ## Getting started with your project
 
@@ -19,7 +19,7 @@ First, create a repository on GitHub with the same name as this project, and the
 git init -b main
 git add .
 git commit -m "init commit"
-git remote add origin git@github.com:arthanson/netbox-python.git
+git remote add origin git@github.com:netbox-community/netbox-python.git
 git push -u origin main
 ```
 
@@ -43,12 +43,8 @@ To enable the code coverage reports, see [here](https://fpgmaas.github.io/cookie
 
 - Create an API Token on [Pypi](https://pypi.org/).
 - Add the API Token to your projects secrets with the name `PYPI_TOKEN` by visiting 
-[this page](https://github.com/arthanson/netbox-python/settings/secrets/actions/new).
-- Create a [new release](https://github.com/arthanson/netbox-python/releases/new) on Github. 
+[this page](https://github.com/netbox-community/netbox-python/settings/secrets/actions/new).
+- Create a [new release](https://github.com/netbox-community/netbox-python/releases/new) on Github. 
 Create a new tag in the form ``*.*.*``.
 
 For more details, see [here](https://fpgmaas.github.io/cookiecutter-poetry/features/cicd/#how-to-trigger-a-release).
-
----
-
-Repository initiated with [fpgmaas/cookiecutter-poetry](https://github.com/fpgmaas/cookiecutter-poetry).
