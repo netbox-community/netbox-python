@@ -29,6 +29,11 @@ class RetrievableAPIResource:
         return self.client.get(f"{self.path}{id}/")
 
 
+class RetrievableRootAPIResource:
+    def get(self, **kwargs):
+        return self.client.get(self.path, params=kwargs)
+
+
 class UpdateableAPIResource:
     def update(self, obj, **kwargs):
         if obj and isinstance(obj, list):

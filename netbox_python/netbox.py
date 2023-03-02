@@ -12,6 +12,7 @@ from api.virtualization import virtualization
 from api.wireless import wireless
 from requests.auth import HTTPBasicAuth
 from rest import RestClient
+from baseapi import RetrievableRootAPIResource, baseapi
 
 NETBOX_DEFAULT_HEADERS = {
     "Accept": "application/json;",
@@ -22,7 +23,9 @@ JSONType = Union[None, bool, int, float, str, List[Any], Dict[str, Any]]
 
 
 class NetBoxClient(RestClient):
+
     def __init__(self, base_url: str, token: str, headers: Dict[str, str] = None):
+        self.status = self._status(self)
         self.token = token
 
         headers = headers or NETBOX_DEFAULT_HEADERS
@@ -39,7 +42,6 @@ class NetBoxClient(RestClient):
         self.extras = extras(self)
         self.ipam = ipam(self)
         self.plugins = plugins(self)
-        # self.status = status(self)
         self.tenancy = tenancy(self)
         self.users = users(self)
         self.virtualization = virtualization(self)
@@ -49,3 +51,6 @@ class NetBoxClient(RestClient):
 
     def __enter__(self):
         return self
+
+    class _status(baseapi, RetrievableRootAPIResource):
+        path = "status/"
