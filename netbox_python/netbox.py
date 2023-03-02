@@ -1,6 +1,5 @@
-from typing import Union, Dict, List, Any
-from requests.auth import HTTPBasicAuth
-from rest import RestClient
+from typing import Any, Dict, List, Union
+
 from api.circuits import circuits
 from api.core import core
 from api.dcim import dcim
@@ -11,7 +10,8 @@ from api.tenancy import tenancy
 from api.users import users
 from api.virtualization import virtualization
 from api.wireless import wireless
-
+from requests.auth import HTTPBasicAuth
+from rest import RestClient
 
 NETBOX_DEFAULT_HEADERS = {
     "Accept": "application/json;",

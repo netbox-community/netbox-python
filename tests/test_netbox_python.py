@@ -4,7 +4,6 @@
 
 import pytest
 
-
 from netbox_python import netbox_python
 
 

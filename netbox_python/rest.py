@@ -1,16 +1,22 @@
 from functools import partialmethod
-from typing import Union, Dict, List, Any
-import requests
-from requests.structures import CaseInsensitiveDict
-from exceptions import NetBoxException
 from json import JSONDecodeError
+from typing import Any, Dict, List, Union
 
+import requests
+from exceptions import NetBoxException
+from requests.structures import CaseInsensitiveDict
 
 JSONType = Union[None, bool, int, float, str, List[Any], Dict[str, Any]]
 
 
 class Result:
-    def __init__(self, status_code: int, headers: CaseInsensitiveDict, message: str = '', data: List[Dict] = None):
+    def __init__(
+        self,
+        status_code: int,
+        headers: CaseInsensitiveDict,
+        message: str = "",
+        data: List[Dict] = None,
+    ):
         """
         Result returned from low-level RestAdapter
         :param status_code: Standard HTTP Status code
@@ -63,14 +69,18 @@ class RestClient:
                 raise NetBoxException("Bad JSON in response") from err
 
         # If status_code in 200-299 range, return success Result with data, otherwise raise exception
-        is_success = 299 >= response.status_code >= 200     # 200 to 299 is OK
+        is_success = 299 >= response.status_code >= 200  # 200 to 299 is OK
         # log_line = log_line_post.format(is_success, response.status_code, response.reason)
         if is_success:
             # self._logger.debug(msg=log_line)
-            return Result(response.status_code, headers=response.headers, message=response.reason, data=data_out)
+            return Result(
+                response.status_code,
+                headers=response.headers,
+                message=response.reason,
+                data=data_out,
+            )
         # self._logger.error(msg=log_line)
         raise NetBoxException(f"{response.status_code}: {response.reason}")
-
 
     get = partialmethod(request, "GET")
     post = partialmethod(request, "POST")
