@@ -1,6 +1,3 @@
-import json
-
-
 class baseapi:
     def __init__(self, client):
         self.client = client

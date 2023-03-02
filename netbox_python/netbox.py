@@ -10,7 +10,6 @@ from api.tenancy import tenancy
 from api.users import users
 from api.virtualization import virtualization
 from api.wireless import wireless
-from requests.auth import HTTPBasicAuth
 from rest import RestClient
 from baseapi import RetrievableRootAPIResource, baseapi
 
@@ -23,7 +22,6 @@ JSONType = Union[None, bool, int, float, str, List[Any], Dict[str, Any]]
 
 
 class NetBoxClient(RestClient):
-
     def __init__(self, base_url: str, token: str, headers: Dict[str, str] = None):
         self.status = self._status(self)
         self.token = token
