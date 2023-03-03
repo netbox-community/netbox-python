@@ -54,13 +54,23 @@ The full documentation is at https://netbox-community.github.io/netbox-python/, 
 To begin, import the NetBox client and instantiate it:
 
 ```
-from netbox_python import NetBoxClient
+from netbox_python import NetBoxClient, Result
 nb = NetBoxClient(
     base_url="http://127.0.0.1:8000/", token="1dc6fa5bfcef8390dd83a261c36ed8f1551b2d6b"
 )
 ```
-
 The first argument NetBoxClient takes is the NetBox URL. The 'token' argument is from NetBox.
+
+Now using the client you can make calls to the api, for example:
+
+```
+ret = nb.dcim.sites.list()
+print(ret.data)
+
+```
+The methods on the api's correspond to the NetBox REST API, so ('circuits', 'core', 'dcim', 'extras', 'ipam', 'plugins', 'tenancy', 'users', 'virtualization', 'wireless')
+
+circuits would have 'circuit_terminations', 'circuit_types', etc... off of it.  Each of the endpoints has 'list', 'get', 'create', 'update' and 'delete' functions.
 
 ## Roadmap
 
