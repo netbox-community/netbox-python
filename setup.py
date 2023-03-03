@@ -37,9 +37,12 @@ setup(
     keywords="netbox_python",
     name="netbox_python",
     packages=find_packages(include=["netbox_python", "netbox_python.*"]),
+    install_requires=[
+        "requests>=2.20.0,<3.0",
+    ],
     test_suite="tests",
     tests_require=test_requirements,
     url="https://github.com/netbox-community/netbox_python",
-    version="0.1.1",
+    version="0.1.3",
     zip_safe=False,
 )
