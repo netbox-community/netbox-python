@@ -1,4 +1,4 @@
-from baseapi import APIResource
+from netbox_python.baseapi import APIResource
 
 
 class core:

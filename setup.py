@@ -4,11 +4,8 @@
 
 from setuptools import find_packages, setup
 
-with open("README.rst") as readme_file:
+with open("README.md") as readme_file:
     readme = readme_file.read()
-
-with open("HISTORY.rst") as history_file:
-    history = history_file.read()
 
 requirements = []
 
@@ -34,7 +31,8 @@ setup(
     description="NetBox Python API Client",
     install_requires=requirements,
     license="Apache Software License 2.0",
-    long_description=readme + "\n\n" + history,
+    long_description=readme,
+    long_description_content_type="text/markdown",
     include_package_data=True,
     keywords="netbox_python",
     name="netbox_python",
@@ -42,6 +40,6 @@ setup(
     test_suite="tests",
     tests_require=test_requirements,
     url="https://github.com/netbox-community/netbox_python",
-    version="0.1.0",
+    version="0.1.1",
     zip_safe=False,
 )

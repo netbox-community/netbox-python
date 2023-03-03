@@ -3,8 +3,8 @@ from json import JSONDecodeError
 from typing import Any, Dict, List, Union
 
 import requests
-from exceptions import NetBoxException
 from requests.structures import CaseInsensitiveDict
+from netbox_python.exceptions import NetBoxException
 
 JSONType = Union[None, bool, int, float, str, List[Any], Dict[str, Any]]
 
@@ -15,6 +15,7 @@ class Result:
         status_code: int,
         headers: CaseInsensitiveDict,
         message: str = "",
+        pagination: dict = None,
         data: List[Dict] = None,
     ):
         """
@@ -73,10 +74,21 @@ class RestClient:
         # log_line = log_line_post.format(is_success, response.status_code, response.reason)
         if is_success:
             # self._logger.debug(msg=log_line)
+            # check if list - fixme: should have cleaner way to do this
+            pagination = None
+            if "count" in data_out and "results" in data_out:
+                pagination = {
+                    "count": data_out.get("count"),
+                    "next": data_out.get("next"),
+                    "previous": data_out.get("previous"),
+                }
+                data_out = data_out.get("results")
+
             return Result(
                 response.status_code,
                 headers=response.headers,
                 message=response.reason,
+                pagination=pagination,
                 data=data_out,
             )
         # self._logger.error(msg=log_line)
