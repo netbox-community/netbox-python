@@ -7,7 +7,9 @@ from setuptools import find_packages, setup
 with open("README.md") as readme_file:
     readme = readme_file.read()
 
-requirements = []
+requirements = [
+    "requests>=2.20.0,<3.0",
+]
 
 test_requirements = [
     "pytest>=3",
@@ -37,9 +39,6 @@ setup(
     keywords="netbox_python",
     name="netbox_python",
     packages=find_packages(include=["netbox_python", "netbox_python.*"]),
-    install_requires=[
-        "requests>=2.20.0,<3.0",
-    ],
     test_suite="tests",
     tests_require=test_requirements,
     url="https://github.com/netbox-community/netbox_python",
