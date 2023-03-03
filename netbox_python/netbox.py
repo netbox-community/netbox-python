@@ -10,8 +10,8 @@ from netbox_python.api.tenancy import tenancy
 from netbox_python.api.users import users
 from netbox_python.api.virtualization import virtualization
 from netbox_python.api.wireless import wireless
-from netbox_python.rest import RestClient
 from netbox_python.baseapi import RetrievableRootAPIResource, baseapi
+from netbox_python.rest import RestClient
 
 NETBOX_DEFAULT_HEADERS = {
     "Accept": "application/json;",

@@ -4,6 +4,7 @@ from typing import Any, Dict, List, Union
 
 import requests
 from requests.structures import CaseInsensitiveDict
+
 from netbox_python.exceptions import NetBoxException
 
 JSONType = Union[None, bool, int, float, str, List[Any], Dict[str, Any]]
