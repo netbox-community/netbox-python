@@ -7,7 +7,7 @@ from requests.structures import CaseInsensitiveDict
 
 from netbox_python.exceptions import NetBoxException
 
-JSONType = Union[None, bool, int, float, str, List[Any], Dict[str, Any]]
+# JSONType = Union[None, bool, int, float, str, List[Any], Dict[str, Any]]
 
 
 class Result:
@@ -17,6 +17,7 @@ class Result:
         headers: CaseInsensitiveDict,
         message: str = "",
         pagination: dict = None,
+        params: dict = None,
         data: List[Dict] = None,
     ):
         """
@@ -30,6 +31,7 @@ class Result:
         self.message = str(message)
         self.data = data if data else []
         self.pagination = pagination
+        self.params = params
 
 
 class RestClient:
@@ -49,7 +51,7 @@ class RestClient:
     def close(self):
         return self._session.close()
 
-    def request(self, method: str, path: str, **kwargs) -> JSONType:
+    def request(self, method: str, path: str, **kwargs) -> Result:
         url = kwargs.pop("url_override", None)
         if not url:
             url = f"{self.base_url}/{path}"
@@ -94,6 +96,7 @@ class RestClient:
                 headers=response.headers,
                 message=response.reason,
                 pagination=pagination,
+                params=kwargs.get("params", None),
                 data=data_out,
             )
         # self._logger.error(msg=log_line)
