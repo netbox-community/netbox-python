@@ -29,6 +29,7 @@ class Result:
         self.headers = headers
         self.message = str(message)
         self.data = data if data else []
+        self.pagination = pagination
 
 
 class RestClient:
@@ -49,10 +50,13 @@ class RestClient:
         return self._session.close()
 
     def request(self, method: str, path: str, **kwargs) -> JSONType:
-        path = f"{self.base_url}/{path}"
+        url = kwargs.pop("url_override", None)
+        if not url:
+            url = f"{self.base_url}/{path}"
+
         data_out = None
         try:
-            response = self._session.request(method=method, url=path, **kwargs)
+            response = self._session.request(method=method, url=url, **kwargs)
             response.raise_for_status()
         except requests.HTTPError as http_error:
             raise NetBoxException(

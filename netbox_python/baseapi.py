@@ -20,6 +20,20 @@ class ListableAPIResource:
     def list(self, **kwargs):
         return self.client.get(self.path, params=kwargs)
 
+    def all(self, **kwargs):
+        ret = self.client.get(self.path, params=kwargs)
+        pagination = ret.pagination
+        while pagination["next"]:
+            partial = self.client.get(
+                self.path, url_override=pagination["next"], params=kwargs
+            )
+            ret.data.append(partial.data)
+            pagination = partial.pagination
+
+        ret.pagination["next"] = None
+        ret.pagination["previous"] = None
+        return ret
+
 
 class RetrievableAPIResource:
     def get(self, id):
