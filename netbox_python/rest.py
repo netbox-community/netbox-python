@@ -13,25 +13,22 @@ from netbox_python.exceptions import NetBoxException
 class Result:
     def __init__(
         self,
-        status_code: int,
-        headers: CaseInsensitiveDict,
-        message: str = "",
         pagination: dict = None,
         params: dict = None,
+        response: requests.Response = None,
         data: List[Dict] = None,
     ):
         """
         Result returned from low-level RestAdapter
-        :param status_code: Standard HTTP Status code
-        :param message: Human readable result
+        :param pagination: {'count': int, 'next': str, 'previous': str} for paginating list returns
+        :param params: dict of parmas sent in the query
+        :param response: requests.response object (status, headers) from API call
         :param data: Python List of Dictionaries (or maybe just a single Dictionary on error)
         """
-        self.status_code = int(status_code)
-        self.headers = headers
-        self.message = str(message)
-        self.data = data if data else []
         self.pagination = pagination
         self.params = params
+        self.response = response
+        self.data = data if data else []
 
 
 class RestClient:
@@ -65,7 +62,6 @@ class RestClient:
                 f"Invalid request from {self.base_url}: {http_error}"
             ) from http_error
         except requests.RequestException as err:
-            # self._logger.error(msg=(str(err)))
             raise NetBoxException("Request failed") from err
 
         if method != "DELETE":
@@ -73,14 +69,11 @@ class RestClient:
             try:
                 data_out = response.json()
             except (ValueError, TypeError, JSONDecodeError) as err:
-                # self._logger.error(msg=log_line_post.format(False, None, e))
                 raise NetBoxException("Bad JSON in response") from err
 
         # If status_code in 200-299 range, return success Result with data, otherwise raise exception
         is_success = 299 >= response.status_code >= 200  # 200 to 299 is OK
-        # log_line = log_line_post.format(is_success, response.status_code, response.reason)
         if is_success:
-            # self._logger.debug(msg=log_line)
             # check if list - fixme: should have cleaner way to do this
             pagination = None
             if "count" in data_out and "results" in data_out:
@@ -92,14 +85,11 @@ class RestClient:
                 data_out = data_out.get("results")
 
             return Result(
-                response.status_code,
-                headers=response.headers,
-                message=response.reason,
                 pagination=pagination,
                 params=kwargs.get("params", None),
+                response=response,
                 data=data_out,
             )
-        # self._logger.error(msg=log_line)
         raise NetBoxException(f"{response.status_code}: {response.reason}")
 
     get = partialmethod(request, "GET")
