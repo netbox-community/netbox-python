@@ -42,7 +42,7 @@ class ListableAPIResource:
             if not result:
                 result = page
             else:
-                result.data.append(page.data)
+                result.data.extend(page.data)
 
         result.pagination["next"] = None
         result.pagination["previous"] = None
