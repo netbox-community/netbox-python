@@ -7,11 +7,11 @@ class ipam:
         self.asns = self._asns(client)
         self.fhrp_group_assignments = self._fhrp_group_assignments(client)
         self.fhrp_groups = self._fhrp_groups(client)
-        self.ip_addresss = self._ip_addresss(client)
+        self.ip_addresses = self._ip_addresses(client)
         self.ip_ranges = self._ip_ranges(client)
         self.l2vpn_terminations = self._l2vpn_terminations(client)
         self.l2vpns = self._l2vpns(client)
-        self.prefixs = self._prefixs(client)
+        self.prefixes = self._prefixes(client)
         self.rirs = self._rirs(client)
         self.roles = self._roles(client)
         self.route_targets = self._route_targets(client)
@@ -34,7 +34,7 @@ class ipam:
     class _fhrp_groups(APIResource):
         path = "ipam/fhrp-groups/"
 
-    class _ip_addresss(APIResource):
+    class _ip_addresses(APIResource):
         path = "ipam/ip-addresses/"
 
     class _ip_ranges(APIResource):
@@ -46,7 +46,7 @@ class ipam:
     class _l2vpns(APIResource):
         path = "ipam/l2vpns/"
 
-    class _prefixs(APIResource):
+    class _prefixes(APIResource):
         path = "ipam/prefixes/"
 
     class _rirs(APIResource):
