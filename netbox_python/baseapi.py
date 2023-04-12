@@ -10,8 +10,11 @@ class baseapi:
 
 
 class CreateableAPIResource:
+    def _create(self, path, *args, **kwargs) -> Result:
+        return self.client.post(path, json=args[0] if args else kwargs)
+
     def create(self, *args, **kwargs) -> Result:
-        return self.client.post(self.path, json=args[0] if args else kwargs)
+        return self._create(self.path, *args, **kwargs)
 
 
 class DeletableAPIResource:
@@ -33,12 +36,15 @@ class ListableAPIResource:
             yield result
             next_token = result.pagination["next"]
 
-    def list(self, **kwargs) -> Result:
-        return self.client.get(self.path, params=kwargs)
+    def _list(self, path, **kwargs) -> Result:
+        return self.client.get(path, params=kwargs)
 
-    def all(self, **kwargs):
+    def list(self, **kwargs) -> Result:
+        return self._list(self.path, **kwargs)
+
+    def _all(self, path, **kwargs):
         result = None
-        for page in self.paginate(self.client.get(self.path, params=kwargs)):
+        for page in self.paginate(self._list(path, **kwargs)):
             if not result:
                 result = page
             else:
@@ -47,6 +53,9 @@ class ListableAPIResource:
         result.pagination["next"] = None
         result.pagination["previous"] = None
         return result
+
+    def all(self, **kwargs):
+        return self._all(self.path, **kwargs)
 
 
 class RetrievableAPIResource:
@@ -86,3 +95,21 @@ class ROAPIResource(
     UpdateableAPIResource,
 ):
     pass
+
+
+class AvailableAPIResource(
+    baseapi,
+    CreateableAPIResource,
+    ListableAPIResource,
+):
+    def create(self, id: str | int, *args, **kwargs) -> Result:
+        path = self.path.format(id=id)
+        return self._create(path, *args, **kwargs)
+
+    def list(self, id: str | int, **kwargs) -> Result:
+        path = self.path.format(id=id)
+        return self._list(path, **kwargs)
+
+    def all(self, id: str | int, **kwargs):
+        path = self.path.format(id=id)
+        return self._all(path, **kwargs)
