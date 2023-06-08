@@ -1,4 +1,5 @@
-from netbox_python.baseapi import APIResource
+from netbox_python.baseapi import APIResource, CreateableAPIResource
+from netbox_python.rest import Result
 
 
 class dcim:
@@ -82,6 +83,9 @@ class dcim:
 
     class _devices(APIResource):
         path = "dcim/devices/"
+
+        def render_config(self, id: str | int, *args, **kwargs) -> Result:
+            return self._create(f"{self.path}{id}/render-config/", *args, **kwargs)
 
     class _front_port_templates(APIResource):
         path = "dcim/front-port-templates/"
