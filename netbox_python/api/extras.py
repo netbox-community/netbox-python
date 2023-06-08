@@ -1,4 +1,5 @@
 from netbox_python.baseapi import APIResource
+from netbox_python.rest import Result
 
 
 class extras:
@@ -25,6 +26,9 @@ class extras:
 
     class _config_templates(APIResource):
         path = "extras/config-templates/"
+
+        def render(self, id: str | int, *args, **kwargs) -> Result:
+            return self._create(f"{self.path}{id}/render/", *args, **kwargs)
 
     class _content_types(APIResource):
         path = "extras/content-types/"
