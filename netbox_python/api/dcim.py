@@ -1,4 +1,4 @@
-from netbox_python.baseapi import APIResource, CreateableAPIResource
+from netbox_python.baseapi import APIResource, CreateableAPIResource, ElevationAPIResource
 from netbox_python.rest import Result
 
 
@@ -155,6 +155,13 @@ class dcim:
 
     class _racks(APIResource):
         path = "dcim/racks/"
+
+        def __init__(self, client):
+            self.elevation = self._elevation(client)
+            super().__init__(client)
+
+        class _elevation(ElevationAPIResource):
+            path = "dcim/racks/{id}/elevation/"
 
     class _rear_port_templates(APIResource):
         path = "dcim/rear-port-templates/"
