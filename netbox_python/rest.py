@@ -73,10 +73,11 @@ class RestClient:
 
         # If status_code in 200-299 range, return success Result with data, otherwise raise exception
         is_success = 299 >= response.status_code >= 200  # 200 to 299 is OK
+        no_content_success = response.status_code == 204 # 204 is OK. Means no content
         if is_success:
             # check if list - fixme: should have cleaner way to do this
             pagination = None
-            if "count" in data_out and "results" in data_out:
+            if not no_content_success and "count" in data_out and "results" in data_out:
                 pagination = {
                     "count": data_out.get("count"),
                     "next": data_out.get("next"),
