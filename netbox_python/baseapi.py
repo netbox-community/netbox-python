@@ -113,3 +113,15 @@ class AvailableAPIResource(
     def all(self, id: str | int, **kwargs):
         path = self.path.format(id=id)
         return self._all(path, **kwargs)
+
+class ElevationAPIResource(
+    baseapi,
+    ListableAPIResource
+):
+    def list(self, id: str | int, **kwargs) -> Result:
+        path = self.path.format(id=id)
+        return self._list(path, **kwargs)
+
+    def all(self, id: str | int, **kwargs):
+        path = self.path.format(id=id)
+        return self._all(path, **kwargs)
