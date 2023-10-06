@@ -95,29 +95,29 @@ class ROAPIResource(
     pass
 
 
-class AvailableAPIResource(
-    baseapi,
-    CreateableAPIResource,
-    ListableAPIResource,
-):
-    def create(self, id: str | int, *args, **kwargs) -> Result:
+class CreateablePathAPIResource:
+    def create(self, *args, **kwargs) -> Result:
         path = self.path.format(id=id)
         return self._create(path, *args, **kwargs)
 
-    def list(self, id: str | int, **kwargs) -> Result:
+
+class ListablePathAPIResource:
+    def list(self, **kwargs) -> Result:
         path = self.path.format(id=id)
         return self._list(path, **kwargs)
 
-    def all(self, id: str | int, **kwargs):
+    def all(self, **kwargs):
         path = self.path.format(id=id)
         return self._all(path, **kwargs)
 
 
-class ElevationAPIResource(baseapi, ListableAPIResource):
-    def list(self, id: str | int, **kwargs) -> Result:
-        path = self.path.format(id=id)
-        return self._list(path, **kwargs)
+class AvailableAPIResource(
+    baseapi,
+    CreateablePathAPIResource,
+    ListablePathAPIResource,
+):
+    pass
 
-    def all(self, id: str | int, **kwargs):
-        path = self.path.format(id=id)
-        return self._all(path, **kwargs)
+
+class ElevationAPIResource(baseapi, ListablePathAPIResource):
+    pass
