@@ -30,9 +30,7 @@ class NetBoxClient(RestClient):
         if token:
             headers["authorization"] = f"Token {token}"
 
-        url = base_url = "{}/api".format(
-            base_url if base_url[-1] != "/" else base_url[:-1]
-        )
+        url = base_url = "{}/api".format(base_url if base_url[-1] != "/" else base_url[:-1])
 
         self.circuits = circuits(self)
         self.core = core(self)

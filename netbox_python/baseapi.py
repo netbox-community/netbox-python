@@ -30,9 +30,7 @@ class ListableAPIResource:
         next_token = result.pagination["next"]
         yield result
         while next_token:
-            result = self.client.get(
-                self.path, url_override=next_token, params=result.params
-            )
+            result = self.client.get(self.path, url_override=next_token, params=result.params)
             yield result
             next_token = result.pagination["next"]
 
@@ -114,10 +112,8 @@ class AvailableAPIResource(
         path = self.path.format(id=id)
         return self._all(path, **kwargs)
 
-class ElevationAPIResource(
-    baseapi,
-    ListableAPIResource
-):
+
+class ElevationAPIResource(baseapi, ListableAPIResource):
     def list(self, id: str | int, **kwargs) -> Result:
         path = self.path.format(id=id)
         return self._list(path, **kwargs)

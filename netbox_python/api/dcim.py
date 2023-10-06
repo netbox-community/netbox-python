@@ -1,4 +1,8 @@
-from netbox_python.baseapi import APIResource, CreateableAPIResource, ElevationAPIResource
+from netbox_python.baseapi import (
+    APIResource,
+    CreateableAPIResource,
+    ElevationAPIResource,
+)
 from netbox_python.rest import Result
 
 
