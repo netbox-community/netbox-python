@@ -9,7 +9,7 @@ name =  "netbox_python"
 authors = [
     {name = "Arthur Hanson", email = "ahanson@netboxlabs.com"},
 ]
-description = "NetBox plugin for NetBox Python."
+description = "NetBox Python API Client."
 readme = "README.md"
 
 classifiers=[
@@ -25,6 +25,10 @@ classifiers=[
 
 requires-python = ">=3.8.1"
 dynamic = ["version"]
+
+dependencies = [
+    'requests>=2.20.0,<3.0',
+]
 
 [project.optional-dependencies]
 test = [
