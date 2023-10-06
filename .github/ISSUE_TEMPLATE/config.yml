@@ -1,6 +1,12 @@
----
+# Reference: https://help.github.com/en/github/building-a-strong-community/configuring-issue-templates-for-your-repository#configuring-the-template-chooser
 blank_issues_enabled: false
 contact_links:
-  - name: NetBox Python Community Support
-    url: https://github.com/netbox-community/netbox-python/discussions
-    about: Please ask and answer questions here.
+  - name: 📖 Contributing Policy
+    url: https://github.com/netbox-community/netbox_python/blob/main/CONTRIBUTING.md
+    about: "Please read through our contributing policy before opening an issue or pull request."
+  - name: ❓ Discussion
+    url: https://github.com/netbox-community/netbox_python/discussions
+    about: "If you're just looking for help, try starting a discussion instead."
+  - name: 💬 Community Slack
+    url: https://netdev.chat
+    about: "Join #netbox on the NetDev Community Slack for assistance with installation issues and other problems."
