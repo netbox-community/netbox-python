@@ -25,6 +25,7 @@ class ipam:
         self.service_templates = self._service_templates(client)
         self.services = self._services(client)
         self.vlan_groups = self._vlan_groups(client)
+        self.vlan_group = vlan_group(client)
         self.vlans = self._vlans(client)
         self.vrfs = self._vrfs(client)
         super().__init__()
