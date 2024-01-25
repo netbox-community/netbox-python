@@ -58,9 +58,7 @@ class RestClient:
             response = self._session.request(method=method, url=url, **kwargs)
             response.raise_for_status()
         except requests.HTTPError as http_error:
-            raise NetBoxException(
-                f"Invalid request from {self.base_url}: {http_error}"
-            ) from http_error
+            raise NetBoxException(f"Invalid request from {self.base_url}: {http_error}") from http_error
         except requests.RequestException as err:
             raise NetBoxException("Request failed") from err
 
@@ -73,7 +71,7 @@ class RestClient:
 
         # If status_code in 200-299 range, return success Result with data, otherwise raise exception
         is_success = 299 >= response.status_code >= 200  # 200 to 299 is OK
-        no_content_success = response.status_code == 204 # 204 is OK. Means no content
+        no_content_success = response.status_code == 204  # 204 is OK. Means no content
         if is_success:
             # check if list - fixme: should have cleaner way to do this
             pagination = None

@@ -16,8 +16,6 @@ class ipam:
         self.ip_addresses = self._ip_addresses(client)
         self.ip_ranges = self._ip_ranges(client)
         self.ip_range = ip_range(client)
-        self.l2vpn_terminations = self._l2vpn_terminations(client)
-        self.l2vpns = self._l2vpns(client)
         self.prefixes = self._prefixes(client)
         self.rirs = self._rirs(client)
         self.roles = self._roles(client)
@@ -25,6 +23,7 @@ class ipam:
         self.service_templates = self._service_templates(client)
         self.services = self._services(client)
         self.vlan_groups = self._vlan_groups(client)
+        self.vlan_group = vlan_group(client)
         self.vlans = self._vlans(client)
         self.vrfs = self._vrfs(client)
         super().__init__()
@@ -49,12 +48,6 @@ class ipam:
 
     class _ip_ranges(APIResource):
         path = "ipam/ip-ranges/"
-
-    class _l2vpn_terminations(APIResource):
-        path = "ipam/l2vpn-terminations/"
-
-    class _l2vpns(APIResource):
-        path = "ipam/l2vpns/"
 
     class _prefixes(APIResource):
         path = "ipam/prefixes/"

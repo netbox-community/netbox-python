@@ -48,9 +48,6 @@ repos:
       - id: python-no-log-warn
       - id: python-no-eval
       - id: python-use-type-annotations
-      - id: rst-backticks
-      - id: rst-directive-colons
-      - id: rst-inline-touching-normal
 
   - repo: https://github.com/mgedmin/check-manifest
     rev: "0.47"

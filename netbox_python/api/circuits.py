@@ -21,7 +21,7 @@ class circuits:
         path = "circuits/circuits/"
 
     class _provider_networks(APIResource):
-        path = "circuits/provider_networks/"
+        path = "circuits/provider-networks/"
 
     class _providers(APIResource):
         path = "circuits/providers/"

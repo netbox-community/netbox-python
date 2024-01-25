@@ -9,6 +9,7 @@ from netbox_python.api.plugins import plugins
 from netbox_python.api.tenancy import tenancy
 from netbox_python.api.users import users
 from netbox_python.api.virtualization import virtualization
+from netbox_python.api.vpn import vpn
 from netbox_python.api.wireless import wireless
 from netbox_python.baseapi import RetrievableRootAPIResource, baseapi
 from netbox_python.rest import RestClient
@@ -30,9 +31,7 @@ class NetBoxClient(RestClient):
         if token:
             headers["authorization"] = f"Token {token}"
 
-        url = base_url = "{}/api".format(
-            base_url if base_url[-1] != "/" else base_url[:-1]
-        )
+        url = base_url = "{}/api".format(base_url if base_url[-1] != "/" else base_url[:-1])
 
         self.circuits = circuits(self)
         self.core = core(self)
@@ -43,6 +42,7 @@ class NetBoxClient(RestClient):
         self.tenancy = tenancy(self)
         self.users = users(self)
         self.virtualization = virtualization(self)
+        self.vpn = vpn(self)
         self.wireless = wireless(self)
 
         super().__init__(base_url=url, headers=headers)

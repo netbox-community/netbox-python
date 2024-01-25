@@ -30,9 +30,7 @@ class ListableAPIResource:
         next_token = result.pagination["next"]
         yield result
         while next_token:
-            result = self.client.get(
-                self.path, url_override=next_token, params=result.params
-            )
+            result = self.client.get(self.path, url_override=next_token, params=result.params)
             yield result
             next_token = result.pagination["next"]
 
@@ -97,31 +95,29 @@ class ROAPIResource(
     pass
 
 
-class AvailableAPIResource(
-    baseapi,
-    CreateableAPIResource,
-    ListableAPIResource,
-):
-    def create(self, id: str | int, *args, **kwargs) -> Result:
+class CreateablePathAPIResource:
+    def create(self, *args, **kwargs) -> Result:
         path = self.path.format(id=id)
         return self._create(path, *args, **kwargs)
 
-    def list(self, id: str | int, **kwargs) -> Result:
+
+class ListablePathAPIResource:
+    def list(self, **kwargs) -> Result:
         path = self.path.format(id=id)
         return self._list(path, **kwargs)
 
-    def all(self, id: str | int, **kwargs):
+    def all(self, **kwargs):
         path = self.path.format(id=id)
         return self._all(path, **kwargs)
 
-class ElevationAPIResource(
+
+class AvailableAPIResource(
     baseapi,
-    ListableAPIResource
+    CreateablePathAPIResource,
+    ListablePathAPIResource,
 ):
-    def list(self, id: str | int, **kwargs) -> Result:
-        path = self.path.format(id=id)
-        return self._list(path, **kwargs)
+    pass
 
-    def all(self, id: str | int, **kwargs):
-        path = self.path.format(id=id)
-        return self._all(path, **kwargs)
+
+class ElevationAPIResource(baseapi, ListablePathAPIResource):
+    pass
